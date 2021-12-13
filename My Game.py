@@ -17,12 +17,43 @@ tile_size = 50
 
 #load images here naaaa
 bg_img = pygame.image.load('img/whitebg.jpg')
+square_img = pygame.image.load('img/square.jpg')
+triangle_img = pygame.image.load('img/triangle.png')
+triangle2_img = pygame.transform.rotate(triangle_img, -90)
+triangle3_img = pygame.transform.rotate(triangle_img, -180)
+triangle4_img = pygame.transform.rotate(triangle_img, 90)
+
+clicked = False
 
 
 def draw_grid():
     for line in range(0, 200):
         pygame.draw.line(screen, (255, 255, 255), (0, line * tile_size), (screen_width, line * tile_size))
         pygame.draw.line(screen, (255, 255, 255), (line * tile_size, 0), (line * tile_size, screen_height))
+
+
+def draw_block():
+    for row in range(14):
+        for col in range(20):
+            if world_data[row][col] > 0:
+                if world_data[row][col] == 1:
+                    #square blocks
+                    img = pygame.transform.scale(square_img, (tile_size, tile_size))
+                    screen.blit(img, (col * tile_size, row * tile_size))
+                if world_data[row][col] == 2:
+                    #triangle blocks
+                    img = pygame.transform.scale(triangle_img, (tile_size, tile_size))
+                    screen.blit(img, (col * tile_size, row * tile_size))
+                if world_data[row][col] == 3:
+                    img = pygame.transform.scale(triangle2_img, (tile_size, tile_size))
+                    screen.blit(img, (col * tile_size, row * tile_size))
+                if world_data[row][col] == 4:
+                    img = pygame.transform.scale(triangle3_img, (tile_size, tile_size))
+                    screen.blit(img, (col * tile_size, row * tile_size))
+                if world_data[row][col] == 5:
+                    img = pygame.transform.scale(triangle4_img, (tile_size, tile_size))
+                    screen.blit(img, (col * tile_size, row * tile_size))
+
 
 #####how to move charecter automatically#####
 class Player:
@@ -45,12 +76,13 @@ class Player:
         elif self.rect.x < 500:
             self.rect.x -= 1
 
+
 class World:
     def __init__(self, data):
         self.tile_list = []
 
         #load images
-        square = pygame.image.load('img/square.jpg')
+        square_img = pygame.image.load('img/square.jpg')
         triangle_img = pygame.image.load('img/triangle.png')
 
         row_count = 0
@@ -58,7 +90,7 @@ class World:
             col_count = 0
             for tile in row:
                 if tile == 1:
-                    img = pygame.transform.scale(square, (tile_size, tile_size))
+                    img = pygame.transform.scale(square_img, (tile_size, tile_size))
                     img_rect = img.get_rect()
                     img_rect.x = col_count * tile_size
                     img_rect.y = row_count * tile_size
@@ -106,10 +138,30 @@ while run:
     world.draw()
     player.update()
     draw_grid()
+    draw_block()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        # mouseclicks to change tiles
+        if event.type == pygame.MOUSEBUTTONDOWN and clicked == False:
+            clicked = True
+            pos = pygame.mouse.get_pos()
+            x = pos[0] // tile_size
+            y = pos[1] // tile_size
+            # check that the coordinates are within the tile area
+            if x < 20 and y < 14:
+                # update tile value
+                if pygame.mouse.get_pressed()[0] == 1:
+                    world_data[y][x] += 1
+                    if world_data[y][x] > 5:
+                        world_data[y][x] = 0
+                elif pygame.mouse.get_pressed()[2] == 1:
+                    world_data[y][x] -= 1
+                    if world_data[y][x] < 0:
+                        world_data[y][x] = 5
+        if event.type == pygame.MOUSEBUTTONUP:
+            clicked = False
 
     pygame.display.update()
     clock.tick(fps)
