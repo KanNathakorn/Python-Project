@@ -2,17 +2,21 @@ import random
 import pygame
 pygame.init()
 
-#screen
+
+#set screen
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Turtle! Far From Home")
 icon = pygame.image.load("img/turtle.png")
 pygame.display.set_icon(icon)
 
-#sound
+
+#load sound
 music = pygame.mixer.Sound('sound/bg.mp3')
+music.set_volume(0.2)
 music.play()
 fail = pygame.mixer.Sound('sound/fail.wav')
-fail.set_volume(0.5)
+fail.set_volume(0.2)
+
 
 #load images
 bg = pygame.image.load("img/greenbg.jpg")
@@ -34,12 +38,9 @@ howtoplay = pygame.image.load('img/howtoplay.png')
 start_img = pygame.transform.scale(start, (200, 200))
 exit_img = pygame.transform.scale(exit, (200, 138))
 howtoplay_img = pygame.transform.scale(howtoplay, (200, 45))
-
-#goal
 goal = pygame.transform.scale(goal_img, (50, 50))
 goal_rect = goal.get_rect(topleft=[370, 10])
 
-main_menu = True
 
 #player
 posX = 370
@@ -92,7 +93,8 @@ car10 = pygame.transform.scale(load_car10, (50, 25))
 car10_rect = car.get_rect(topleft=[carX10, carY10])
 carmove = 1
 
-#level
+
+#Text and Font
 level = 1
 font = pygame.font.Font('freesansbold.ttf', 32)
 textX = 10
@@ -101,6 +103,11 @@ over_font = pygame.font.Font('freesansbold.ttf', 64)
 small_font = pygame.font.Font('freesansbold.ttf', 20)
 Title_font = pygame.font.Font('freesansbold.ttf', 58)
 
+
+main_menu = True
+
+
+#button
 class Button:
 	def __init__(self, x, y, image):
 		self.image = image
@@ -146,15 +153,15 @@ def game_over():
 	fail.play()
 
 
+#my button
 start_button = Button(800 // 2 - 100, 600 // 2 - 175, start_img)
 exit_button = Button(800 // 2 - 100, 600 // 2 + 50, exit_img)
 
 
+#main
 run = True
 while run:
 	pygame.time.delay(12)
-
-	#bg and goal
 	screen.blit(bg, (0, 0))
 
 	if main_menu == True:
@@ -183,40 +190,39 @@ while run:
 		if keys[pygame.K_DOWN] and player_rect.y < 600-50:
 			player_rect.y += move
 
-
 		#car movement
 		car_rect.x -= carmove
 		if car_rect.x == 0:
-			car_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car2_rect.x -= carmove
 		if car2_rect.x == 0:
-			car2_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car2_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car3_rect.x -= carmove
 		if car3_rect.x == 0:
-			car3_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car3_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car4_rect.x -= carmove
 		if car4_rect.x == 0:
-			car4_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car4_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car5_rect.x -= carmove
 		if car5_rect.x == 0:
-			car5_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car5_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car6_rect.x -= carmove
 		if car6_rect.x == 0:
-			car6_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car6_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car7_rect.x -= carmove
 		if car7_rect.x == 0:
-			car7_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car7_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car8_rect.x -= carmove
 		if car8_rect.x == 0:
-			car8_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car8_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car9_rect.x -= carmove
 		if car9_rect.x == 0:
-			car9_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car9_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 		car10_rect.x -= carmove
 		if car10_rect.x == 0:
-			car10_rect = car.get_rect(topleft=[800, random.randint(50, 400)])
+			car10_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 
-		#collision
+		#collision conditions
 		if player_rect.colliderect(goal_rect):
 			level += 1
 			carmove += 0.3
@@ -266,7 +272,7 @@ while run:
 		#show score
 		show_score(textX, testY)
 
-		#show image
+		#display player and car images
 		screen.blit(player, player_rect)
 		screen.blit(car, car_rect)
 		screen.blit(car2, car2_rect)
