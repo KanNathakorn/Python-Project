@@ -31,6 +31,10 @@ load_car7 = pygame.image.load('img/car7.png')
 load_car8 = pygame.image.load('img/car8.png')
 load_car9 = pygame.image.load('img/car9.png')
 load_car10 = pygame.image.load('img/car10.png')
+load_car11 = pygame.image.load('img/car11.png')
+load_car12 = pygame.image.load('img/car12.png')
+load_car13 = pygame.image.load('img/car13.png')
+load_car14 = pygame.image.load('img/car14.png')
 goal_img = pygame.image.load('img/goal.png')
 start = pygame.image.load('img/start.png')
 exit = pygame.image.load('img/exit.png')
@@ -91,6 +95,22 @@ carX10 = random.randint(0, 800)
 carY10 = random.randint(50, 500)
 car10 = pygame.transform.scale(load_car10, (50, 25))
 car10_rect = car.get_rect(topleft=[carX10, carY10])
+carX11 = random.randint(0, 800)
+carY11 = random.randint(50, 500)
+car11 = pygame.transform.scale(load_car10, (50, 25))
+car11_rect = car.get_rect(topleft=[carX10, carY10])
+carX12 = random.randint(0, 800)
+carY12 = random.randint(50, 500)
+car12 = pygame.transform.scale(load_car10, (50, 25))
+car12_rect = car.get_rect(topleft=[carX10, carY10])
+carX13 = random.randint(0, 800)
+carY13 = random.randint(50, 500)
+car13 = pygame.transform.scale(load_car10, (50, 25))
+car13_rect = car.get_rect(topleft=[carX10, carY10])
+carX14 = random.randint(0, 800)
+carY14 = random.randint(50, 500)
+car14 = pygame.transform.scale(load_car10, (50, 25))
+car14_rect = car.get_rect(topleft=[carX10, carY10])
 carmove = 1
 
 
@@ -135,6 +155,59 @@ class Button:
 		screen.blit(self.image, self.rect)
 
 		return action
+
+
+def level_1():
+	screen.blit(car, car_rect)
+	screen.blit(car2, car2_rect)
+	screen.blit(car3, car3_rect)
+	screen.blit(car4, car4_rect)
+	screen.blit(car5, car5_rect)
+
+
+def level_2():
+	level_1()
+	screen.blit(car6, car6_rect)
+
+
+def level_3():
+	level_2()
+	screen.blit(car7, car7_rect)
+
+
+def level_4():
+	level_3()
+	screen.blit(car8, car8_rect)
+
+
+def level_5():
+	level_4()
+	screen.blit(car9, car9_rect)
+
+
+def level_6():
+	level_5()
+	screen.blit(car10, car10_rect)
+
+
+def level_7():
+	level_6()
+	screen.blit(car11, car11_rect)
+
+
+def level_8():
+	level_7()
+	screen.blit(car12, car12_rect)
+
+
+def level_9():
+	level_8()
+	screen.blit(car13, car13_rect)
+
+
+def level_10():
+	level_9()
+	screen.blit(car14, car14_rect)
 
 
 def show_score(x, y):
@@ -221,69 +294,479 @@ while run:
 		car10_rect.x -= carmove
 		if car10_rect.x == 0:
 			car10_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
+		car11_rect.x -= carmove
+		if car11_rect.x == 0:
+			car11_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
+		car12_rect.x -= carmove
+		if car12_rect.x == 0:
+			car12_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
+		car13_rect.x -= carmove
+		if car13_rect.x == 0:
+			car13_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
+		car14_rect.x -= carmove
+		if car14_rect.x == 0:
+			car14_rect = car.get_rect(topleft=[800, random.randint(50, 500)])
 
 		#collision conditions
-		if player_rect.colliderect(goal_rect):
-			level += 1
-			carmove += 0.3
-			player_rect = player.get_rect(topleft=[posX, posY])
 
-		if player_rect.colliderect(car_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car2_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car3_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car4_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car5_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car6_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car7_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car8_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car9_rect):
-			game_over()
-			carmove = 0
-			move = 0
-		if player_rect.colliderect(car10_rect):
-			game_over()
-			carmove = 0
-			move = 0
 
 		#show score
 		show_score(textX, testY)
 
 		#display player and car images
 		screen.blit(player, player_rect)
-		screen.blit(car, car_rect)
-		screen.blit(car2, car2_rect)
-		screen.blit(car3, car3_rect)
-		screen.blit(car4, car4_rect)
-		screen.blit(car5, car5_rect)
-		screen.blit(car6, car6_rect)
-		screen.blit(car7, car7_rect)
-		screen.blit(car8, car8_rect)
-		screen.blit(car9, car9_rect)
-		screen.blit(car10, car10_rect)
+
+		# levels
+		if level == 1:
+			level_1()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 2:
+			level_2()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 3:
+			level_3()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 4:
+			level_4()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 5:
+			level_5()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car9_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 6:
+			level_6()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car9_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car10_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 7:
+			level_7()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car9_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car10_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car11_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 8:
+			level_8()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car9_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car10_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car11_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car12_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 9:
+			level_9()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car9_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car10_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car11_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car12_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car13_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				level += 1
+				carmove += 0.1
+				player_rect = player.get_rect(topleft=[posX, posY])
+
+		if level == 10:
+			level_10()
+			if player_rect.colliderect(car_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car2_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car3_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car4_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car5_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car6_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car7_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car8_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car9_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car10_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car11_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car12_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car13_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(car14_rect):
+				game_over()
+				carmove = 0
+				move = 0
+			if player_rect.colliderect(goal_rect):
+				carmove = 0
+				move = 0
+				over_text = over_font.render("YOU WIN", True, (0, 0, 0))
+				screen.blit(over_text, (275, 275))
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
